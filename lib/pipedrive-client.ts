@@ -89,6 +89,55 @@ export class PipedriveReadOnlyClient {
     })
   }
 
+  // Buscar TODOS os deals sem paginação
+  async getAllDeals(
+    params: {
+      status?: "open" | "won" | "lost" | "deleted" | "all_not_deleted"
+      sort?: string
+    } = {},
+  ): Promise<Deal[]> {
+    const allDeals: Deal[] = []
+    let start = 0
+    const limit = 100 // Máximo permitido pela API
+    let hasMore = true
+    let requestCount = 0
+
+    try {
+      while (hasMore && requestCount < 10) { // Limite de segurança
+        console.log(`Fetching deals: start=${start}, limit=${limit}`)
+        
+        const response = await this.get<Deal>("/deals", {
+          status: "all_not_deleted",
+          limit,
+          start,
+          ...params,
+        })
+
+        if (response.data && response.data.length > 0) {
+          allDeals.push(...response.data)
+          console.log(`Fetched ${response.data.length} deals, total: ${allDeals.length}`)
+        }
+
+        // Verifica se há mais dados
+        hasMore = response.additional_data?.pagination?.more_items_in_collection || false
+        start += limit
+        requestCount++
+
+        // Pequena pausa para não sobrecarregar a API
+        if (hasMore) {
+          await new Promise(resolve => setTimeout(resolve, 100))
+        }
+      }
+
+      console.log(`Total deals fetched: ${allDeals.length}`)
+      return allDeals
+    } catch (error) {
+      console.error('Error in getAllDeals:', error)
+      // Se houver erro, retorna pelo menos os dados que conseguiu buscar
+      return allDeals
+    }
+  }
+
   async getDealById(id: number) {
     const response = await this.get<Deal>(`/deals/${id}`)
     return response.data?.[0] || null
@@ -106,6 +155,34 @@ export class PipedriveReadOnlyClient {
       limit: 100,
       ...params,
     })
+  }
+
+  // Buscar TODAS as persons sem paginação
+  async getAllPersons(
+    params: {
+      sort?: string
+    } = {},
+  ): Promise<Person[]> {
+    const allPersons: Person[] = []
+    let start = 0
+    const limit = 100 // Máximo permitido pela API
+    let hasMore = true
+
+    while (hasMore) {
+      const response = await this.get<Person>("/persons", {
+        limit,
+        start,
+        ...params,
+      })
+
+      allPersons.push(...response.data)
+
+      // Verifica se há mais dados
+      hasMore = response.additional_data?.pagination?.more_items_in_collection || false
+      start += limit
+    }
+
+    return allPersons
   }
 
   async getPersonById(id: number) {

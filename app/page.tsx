@@ -16,6 +16,21 @@ export default function Home() {
       name: 'Pipedrive Explorer',
       path: '/pipedrive-explorer',
       description: 'Explorador da API do Pipedrive'
+    },
+    {
+      name: 'Exemplo com Paginação',
+      path: '/pagination-example',
+      description: 'Demonstração de paginação de dados'
+    },
+    {
+      name: 'Exemplo Sem Paginação',
+      path: '/no-pagination-example',
+      description: 'Demonstração sem paginação - primeiros 100 registros'
+    },
+    {
+      name: 'Carregar Todos os Deals',
+      path: '/load-all-deals',
+      description: 'Carrega TODOS os deals automaticamente'
     }
   ]
 
