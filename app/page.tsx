@@ -37,12 +37,43 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
       <div className="max-w-4xl mx-auto">
+        {/* Objetivo do Projeto */}
+        <section className="mb-10 p-6 bg-white rounded-xl shadow-md border border-gray-200">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Pipedrive Next.js Integration</h1>
+          <p className="text-lg text-gray-700 mb-2">
+            Este projeto tem como objetivo estudar e demonstrar a integração da API do Pipedrive usando Next.js, React e TypeScript. Ele serve como base para aprendizado, testes, análise de dados e boas práticas de integração com APIs externas.
+          </p>
+          <p className="text-sm text-gray-500">
+            Projeto de autoria própria, criado exclusivamente para fins educacionais e de estudo.
+          </p>
+        </section>
+
+        {/* Como Contribuir */}
+        <section className="mb-10 p-6 bg-blue-50 rounded-xl border border-blue-200">
+          <h2 className="text-2xl font-semibold text-blue-900 mb-2">Como contribuir</h2>
+          <p className="text-gray-700 mb-2">
+            Quer contribuir com este projeto? Siga os passos abaixo:
+          </p>
+          <ol className="list-decimal list-inside text-gray-700 mb-2">
+            <li>Faça um fork deste repositório no GitHub.</li>
+            <li>Clone o seu fork para sua máquina local.</li>
+            <li>Crie uma branch para sua contribuição: <span className="font-mono bg-gray-100 px-1 rounded">git checkout -b minha-contribuicao</span></li>
+            <li>Implemente sua melhoria ou correção.</li>
+            <li>Faça commit e push das alterações.</li>
+            <li>Abra um Pull Request explicando sua contribuição.</li>
+          </ol>
+          <p className="text-sm text-gray-600">
+            Sugestões, correções e novas ideias são muito bem-vindas! Não esqueça de consultar o README para mais detalhes sobre o projeto.
+          </p>
+        </section>
+
+        {/* Links das Rotas */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Bem-vindo ao Projeto Next.js
-          </h1>
-          <p className="text-xl text-gray-600">
-            Integração com Pipedrive - Escolha uma das opções abaixo:
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Funcionalidades disponíveis
+          </h2>
+          <p className="text-lg text-gray-600">
+            Escolha uma das opções abaixo para navegar pelo projeto:
           </p>
         </div>
 
@@ -54,9 +85,9 @@ export default function Home() {
               className="group block p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 hover:border-blue-300"
             >
               <div className="text-center">
-                <h2 className="text-2xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors mb-3">
+                <h3 className="text-2xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors mb-3">
                   {route.name}
-                </h2>
+                </h3>
                 <p className="text-gray-600 group-hover:text-gray-800 transition-colors">
                   {route.description}
                 </p>
